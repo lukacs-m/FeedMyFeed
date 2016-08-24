@@ -1,1 +1,1 @@
-React MyTodo App
+React/Redux Boilerplate App
