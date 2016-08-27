@@ -7,7 +7,6 @@ import {firebaseRef, githubProvider, googleProvider, facebookProvider} from "app
  */
 
 export var startLogin = (accountType) => {
-
     return (dispatch, getState) => {
         switch (accountType) {
             case 'github':
@@ -44,5 +43,25 @@ export var login = (uid) => {
     return {
         type: 'LOGIN',
         uid
+    };
+};
+
+
+/**
+ *
+ * @returns {{type: string}}
+ */
+export var logout = () => {
+    return {
+        type: 'LOGOUT'
+    };
+};
+
+
+export var startLogout = () => {
+    return (dispatch, getState) => {
+        return firebase.auth().signOut().then(() => {
+            console.log('Logged out!');
+        });
     };
 };

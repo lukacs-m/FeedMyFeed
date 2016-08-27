@@ -57,7 +57,8 @@ module.exports = {
             applicationStyles: 'app/styles/app.scss',
             actions: 'app/actions/actions.jsx',
             reducers: 'app/reducers/reducers.jsx',
-            configureStore: 'app/store/configureStore.jsx'
+            configureStore: 'app/store/configureStore.jsx',
+            resources: "app/styles/resources"
         },
         extensions: ['', '.js', '.jsx']
     },
@@ -70,7 +71,8 @@ module.exports = {
                 },
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/
-            }
+            },
+            { test: /\.(png|jpg|svg)$/, loader: 'url-loader?limit=8192' }
         ]
     },
     sassLoader: {
