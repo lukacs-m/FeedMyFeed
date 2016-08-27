@@ -1,5 +1,11 @@
-export var myReducer = (state = '', action) => {
+export var authentificationReducer = (state = {}, action) => {
     switch (action.type) {
+        case 'LOGIN':
+            return {
+                uid: action.uid
+            };
+        case 'LOGOUT':
+            return {};
         default:
             return state;
     }

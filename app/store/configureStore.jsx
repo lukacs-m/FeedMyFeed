@@ -1,12 +1,12 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
 
-import {myReducer} from 'reducers';
+import {authentificationReducer} from 'reducers';
 
 
 export var configure = (initialState = {}) => {
     var reducer = redux.combineReducers({
-        myReducer: myReducer
+        authentification: authentificationReducer
     });
 
     var store = redux.createStore(reducer, initialState, redux.compose(
