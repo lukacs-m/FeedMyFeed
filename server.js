@@ -1,9 +1,10 @@
 /**
 * Created by user on 12/05/2016.
 */
-var express = require('express');
+import express from 'express';
 
-var app = express();
+let app = express();
+
 const PORT = process.env.PORT || 3000;
 
 app.use(function(req,res, next){

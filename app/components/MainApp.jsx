@@ -1,35 +1,24 @@
-import React from 'react';
-import * as Redux from 'react-redux';
-import * as actions from 'actions';
+import React from "react";
+import * as Redux from "react-redux";
+import Navigation from "Navigation";
 
-export var MainApp = React.createClass({
-    onLogout(e) {
-        e.preventDefault();
-        var {dispatch} = this.props;
-
-        dispatch(actions.startLogout());
-    },
+export let MainApp = React.createClass({
     render() {
         return (
             <div>
-                coucou tu es sur le main app
-                <div className="page-actions">
-                    <a href="#" onClick={this.onLogout}>Logout</a>
+                { this.props.auth.uid ? <Navigation/> : null }
+                <div className="row">
+                    <div className="column small-centered small-12">
+                        {this.props.children}
+                    </div>
                 </div>
-                {/*<h1 className="page-title">Todo App</h1>*/}
-                {/*<div className="row">*/}
-                    {/*<div className="column small-centered small-11 medium-6 large-5">*/}
-                        {/*<div className="container">*/}
-                            {/*<TodoItemSearch/>*/}
-                            {/*<TodoList/>*/}
-                            {/*<AddTodoItem/>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
-                {/*</div>*/}
-
             </div>
         );
     }
 });
 
-export default Redux.connect()(MainApp);
+export default Redux.connect(
+    (state) => {
+        return state;
+    }
+)(MainApp);

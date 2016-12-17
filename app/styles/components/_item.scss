@@ -1,0 +1,25 @@
+.item-img {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  font-size: smaller;
+  color: grey;
+}
+
+.item-standfirst {
+  color: grey;
+  font-style: italic;
+}
+
+.add-button {
+ display:block;
+  margin:auto;
+}
+
+@media screen and (min-width: 1122px) {
+  .add-button {
+    position: fixed;
+    top: 50%;
+    right: 1rem;
+  }
+}

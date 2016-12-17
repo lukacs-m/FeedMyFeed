@@ -1,15 +1,16 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
 
-import {authentificationReducer} from 'reducers';
+import {authentificationReducer, newsReducer, articlesReducer} from 'reducers';
 
-
-export var configure = (initialState = {}) => {
-    var reducer = redux.combineReducers({
-        authentification: authentificationReducer
+export const configure = (initialState = {}) => {
+    let reducer = redux.combineReducers({
+        news: newsReducer,
+        auth: authentificationReducer,
+        articles: articlesReducer
     });
 
-    var store = redux.createStore(reducer, initialState, redux.compose(
+    let store = redux.createStore(reducer, initialState, redux.compose(
         redux.applyMiddleware(thunk),
         window.devToolsExtension ? window.devToolsExtension() : f => f
     ));

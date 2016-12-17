@@ -6,7 +6,7 @@ import imgGithub from "resources/icons/github color.1.svg";
 import imgGoogle from "resources/icons/google color.1.svg";
 
 
-export var Login = React.createClass({
+export let Login = React.createClass({
     onLogin(accountType, dispatch) {
         dispatch(actions.startLogin(accountType));
     },
@@ -25,8 +25,6 @@ export var Login = React.createClass({
                         </div>
                         <div className="row">
                             <div className="button-login">
-
-
                             <div className="columns small-12 medium-4 large-4 text-center">
                                 <button onClick={() => this.onLogin('github', this.props.dispatch)}>
                                     <img src={imgGithub} alt="Submit"/>

@@ -1,0 +1,14 @@
+.top-bar{
+  .menu-text{
+    color: $nav-text-color;
+  }
+
+  .menu > .menu-text > a {
+    display:inline;
+    padding: 0;
+  }
+
+  .active-link{
+    font-weight: bold;
+  }
+}

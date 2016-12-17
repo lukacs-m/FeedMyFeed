@@ -1,6 +1,6 @@
-var webpack = require("webpack");
-var path = require('path');
-var envFile = require('node-env-file');
+let webpack = require("webpack");
+let path = require('path');
+let envFile = require('node-env-file');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -20,6 +20,7 @@ module.exports = {
         jquery: 'jQuery'
     },
     plugins: [
+        new webpack.OldWatchingPlugin(),
         new webpack.ProvidePlugin({
             '$': 'jquery',
             'jQuery': 'jquery',
@@ -37,7 +38,8 @@ module.exports = {
                 FIREBASE_AUTH_DOMAIN: JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
                 FIREBASE_DATABASE_URL: JSON.stringify(process.env.FIREBASE_DATABASE_URL),
                 FIREBASE_STORAGE_BUCKET: JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET),
-                GITHUB_ACCESS_TOKEN: JSON.stringify(process.env.GITHUB_ACCESS_TOKEN)
+                GITHUB_ACCESS_TOKEN: JSON.stringify(process.env.GITHUB_ACCESS_TOKEN),
+                GUARDIANKEY: JSON.stringify(process.env.GUARDIANKEY)
             }
         })
     ],
@@ -72,7 +74,8 @@ module.exports = {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/
             },
-            { test: /\.(png|jpg|svg)$/, loader: 'url-loader?limit=8192' }
+            { test: /\.(png|jpg|svg)$/,
+                loader: 'url-loader?limit=8192' }
         ]
     },
     sassLoader: {
