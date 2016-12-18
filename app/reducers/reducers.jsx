@@ -37,7 +37,7 @@ export let articlesReducer = (state = [], action) => {
                 ...state,
                 ...action.articles
             ];
-        case 'DELETE_TODO_ITEM':
+        case 'DELETE_ARTICLE_ITEM':
             return state.filter((article) => {
                 if (article.id !== action.id){
                     return article;

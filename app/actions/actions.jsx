@@ -62,7 +62,7 @@ export const logout = () => {
 };
 
 
-export const startLogout = () => {
+export let startLogout = () => {
     return (dispatch, getState) => {
         return firebase.auth().signOut().then(() => {
             console.log('Logged out!');
@@ -72,14 +72,14 @@ export const startLogout = () => {
 
 ///Actions linked to news items management
 
-export const addLastestNews = (news) => {
+export let addLastestNews = (news) => {
     return {
         type: 'ADD_LASTEST_NEWS',
         news
     };
 };
 
-export const getLatestNews = () => {
+export let getLatestNews = () => {
     return (dispatch, getState) => {
         theGuardianAPI.getLastNews().then((res) => {
             let newsArray = [];
@@ -100,14 +100,14 @@ export const getLatestNews = () => {
 
 /// Actions linked to user saved articles management
 
-export const addArticleItem = (article) => {
+export let addArticleItem = (article) => {
     return {
         type: 'ADD_ARTICLE_ITEM',
         article
     };
 };
 
-export const startAddArticle = (articleContent) => {
+export let startAddArticle = (articleContent) => {
     return (dispatch, getState) => {
         let article = {
             articleContent
@@ -127,14 +127,14 @@ export const startAddArticle = (articleContent) => {
     };
 };
 
-export const addArticles = (articles) => {
+export let addArticles = (articles) => {
     return {
         type: 'ADD_ARTICLES',
         articles
     };
 };
 
-export const getArticles = () => {
+export let getArticles = () => {
     return (dispatch, getState) => {
         let uid = getState().auth.uid;
         let articlesRef = firebaseRef.child(`users/${uid}/articles`);
