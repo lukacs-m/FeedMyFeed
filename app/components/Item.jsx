@@ -1,14 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "actions";
 
-export let Item = React.createClass({
-    addArticle (article) {
-        console.log("article", article);
-        let {dispatch} = this.props;
-        dispatch(actions.startAddArticle(article));
-    },
-    render() {
+export class Item extends Component {
+    addArticle () {
+        let {dispatch, newsItem} = this.props;
+        console.log("article", newsItem);
+        dispatch(actions.startAddArticle(newsItem));
+    }
+
+    render () {
         let { newsItem } = this.props;
         return (
             <div>
@@ -21,12 +22,12 @@ export let Item = React.createClass({
                         <div className="text-justify" dangerouslySetInnerHTML={{ __html: newsItem.fields.body }}/>
                     </div>
                 </div>
-                <button className="add-button button" onClick={() => this.addArticle(newsItem)}> Add to your articles
+                <button className="add-button button" onClick={ this.addArticle.bind(this) }> Add to your articles
                 </button>
             </div>
         );
     }
-});
+}
 
 export default connect(
     (state, stateProps) => {

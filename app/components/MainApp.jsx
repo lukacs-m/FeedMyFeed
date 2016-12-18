@@ -1,9 +1,9 @@
-import React from "react";
-import * as Redux from "react-redux";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import Navigation from "Navigation";
 
-export let MainApp = React.createClass({
-    render() {
+export class MainApp extends Component {
+    render () {
         return (
             <div>
                 { this.props.auth.uid ? <Navigation/> : null }
@@ -15,9 +15,9 @@ export let MainApp = React.createClass({
             </div>
         );
     }
-});
+}
 
-export default Redux.connect(
+export default connect(
     (state) => {
         return state;
     }

@@ -21,7 +21,6 @@ firebase.auth().onAuthStateChanged((user) => {
         store.dispatch(actions.getArticles());
         hashHistory.push('/news');
     } else {
-        console.log("on rentre dans logout");
         store.dispatch(actions.logout());
         hashHistory.push('/');
     }

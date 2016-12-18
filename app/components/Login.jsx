@@ -1,16 +1,23 @@
-import React from "react";
-import * as Redux from "react-redux";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import * as actions from "actions";
 import imgFacebook from "resources/icons/facebook color.1.svg";
 import imgGithub from "resources/icons/github color.1.svg";
 import imgGoogle from "resources/icons/google color.1.svg";
 
 
-export let Login = React.createClass({
-    onLogin(accountType, dispatch) {
+export class Login extends Component {
+
+    constructor (props) {
+        super(props);
+        this.onLogin = this.onLogin.bind(this);
+    }
+
+    onLogin (accountType, dispatch) {
         dispatch(actions.startLogin(accountType));
-    },
-    render: function () {
+    }
+
+    render () {
         return (
             <div>
                 <h1 className="page-title">Feed My feed</h1>
@@ -47,6 +54,6 @@ export let Login = React.createClass({
             </div>
         );
     }
-});
+}
 
-export default Redux.connect()(Login);
+export default connect()(Login);

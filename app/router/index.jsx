@@ -22,12 +22,12 @@ let redirectIfLoggedIn = (nextState, replace, next) => {
 };
 
 export default (
-    <Router history={hashHistory}>
-        <Route path="/" component={MainApp}>
-            <Route path="news" component={News} onEnter={requireLogin}/>
-            <Route path="news/:id" component={Item} onEnter={requireLogin}/>
-            <Route path="articles" component={Articles} onEnter={requireLogin}/>
-            <IndexRoute component={Login} onEnter={redirectIfLoggedIn}/>
+    <Router history={ hashHistory }>
+        <Route path="/" component={ MainApp }>
+            <Route path="news" component={ News } onEnter={ requireLogin }/>
+            <Route path="news/:id" component={ Item}  onEnter={ requireLogin }/>
+            <Route path="articles" component={ Articles } onEnter={ requireLogin }/>
+            <IndexRoute component={ Login } onEnter={ redirectIfLoggedIn }/>
         </Route>
     </Router>
 );

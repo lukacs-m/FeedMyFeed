@@ -1,12 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import TestUtils from 'react-addons-test-utils';
 import expect from 'expect';
 
 import { configure } from 'configureStore';
-import News  from 'News';
-import NewsItem from 'NewsItem'
+import News from 'News';
+import { NewsItem } from 'NewsItem'
 
 describe('News', () => {
     it('should exist', () => {
@@ -48,7 +47,7 @@ describe('News', () => {
         );
 
         let newsList = TestUtils.scryRenderedComponentsWithType(provider, News)[0];
-        let newsComponents = TestUtils.scryRenderedComponentsWithType(newsList, NewsItem);
+        let newsComponents = TestUtils.scryRenderedDOMComponentsWithClass(newsList, "news-item");
 
         expect(newsComponents.length).toBe(news.length);
     });

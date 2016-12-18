@@ -1,16 +1,16 @@
-import React from "react";
-import * as Redux from "react-redux";
-import {Link, IndexLink} from "react-router";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Link, IndexLink } from "react-router";
 import * as actions from "actions";
 
 
-export let Navigation = React.createClass({
-    onLogout(e) {
-        // e.preventDefault();
-        let {dispatch} = this.props;
+export class Navigation extends Component {
+    onLogout () {
+        let { dispatch } = this.props;
         dispatch(actions.startLogout());
-    },
-    render: function () {
+    }
+
+    render () {
         return (
             <div className="top-bar">
                 <div className="top-bar-title">
@@ -29,7 +29,7 @@ export let Navigation = React.createClass({
                                 <Link to="/articles" activeClassName="active-link">My Articles</Link>
                             </li>
                             <li>
-                                <a href="#" onClick={this.onLogout}>Logout</a>
+                                <a href="#" onClick={this.onLogout.bind(this)}>Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -44,6 +44,6 @@ export let Navigation = React.createClass({
             </div>
         );
     }
-});
+}
 
-export default Redux.connect()(Navigation);
+export default connect()(Navigation);

@@ -1,9 +1,8 @@
-import React from 'react';
-import * as Redux from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export let Articles = React.createClass({
-
-    render() {
+export class Articles extends Component {
+    render () {
         let test = this.props;
         console.log("props in article", test);
         return (
@@ -12,9 +11,9 @@ export let Articles = React.createClass({
             </div>
         );
     }
-});
+}
 
-export default Redux.connect(
+export default connect(
     (state) => {
         return state
     }
