@@ -3,8 +3,13 @@ import { connect } from "react-redux";
 import { Link, IndexLink } from "react-router";
 import * as actions from "actions";
 
-
+/**
+ * Component that takes care of rendering the navbar
+ */
 export class Navigation extends Component {
+    /**
+     * function that dispatches a logout action
+     */
     onLogout () {
         let { dispatch } = this.props;
         dispatch(actions.startLogout());

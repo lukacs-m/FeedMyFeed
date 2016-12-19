@@ -8,9 +8,9 @@ import {
 } from 'actionTypes';
 
 /**
- *
- * @param state
- * @param action
+ * Reducer in charge of the auth actions handling
+ * @param state An object representing the auth state
+ * @param action the action to parse
  * @returns {*}
  */
 export let authentificationReducer = (state = {}, action) => {
@@ -27,9 +27,9 @@ export let authentificationReducer = (state = {}, action) => {
 };
 
 /**
- *
- * @param state
- * @param action
+ * Reducer in charge of the news actions handling
+ * @param state An Array representing the news
+ * @param action the action to parse
  * @returns {*}
  */
 export let newsReducer = (state = [], action) => {
@@ -47,9 +47,9 @@ export let newsReducer = (state = [], action) => {
 };
 
 /**
- *
- * @param state
- * @param action
+ * Reducer in charge of the articles actions handling
+ * @param state An Array representing the user articles state
+ * @param action the action to parse
  * @returns {*}
  */
 export let articlesReducer = (state = [], action) => {
