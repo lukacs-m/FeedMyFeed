@@ -1,7 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import expect from 'expect';
-import nock from 'nock';
 import * as actions from '../../actions/actions';
 import * as types from '../../utils/actionTypes';
 
@@ -75,10 +74,6 @@ describe('Actions', () => {
 
     describe('Async actions', () => {
 
-        afterEach(() => {
-            nock.cleanAll()
-        });
-
         it('should get lastest news', ()=> {
             const news =  [
                 {
@@ -89,37 +84,6 @@ describe('Actions', () => {
                 }
             ];
 
-            // fetch(`http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${search}&api_key=abc123&format=json&limit=5`)
-            // nock('http://ws.audioscrobbler.com')
-            //     .get('/2.0/')
-            //     .query({
-            //         method: 'artist.search',
-            //         artist: 'bob',
-            //         api_key: 'somekey123',
-            //         format: 'json',
-            //         limit: '5'
-            //     })
-            //     .reply(200, {fake: true})
-
-            // nock.recorder.rec({
-            //     dont_print: false
-            // });
-            //
-            // var nockCalls = nock.recorder.play();
-            //
-            // nock('https://content.guardianapis.com')
-            //     .get("/search")
-            //     .query({
-            //         'show-fields':'all',
-            //         type:'article',
-            //         'api-key':'111707b7-de98-4bfe-a923-9dd8d04abab7'
-            //     }).reply(200, { body: { news } });
-
-
-            nock('https://content.guardianapis.com/search?show-fields=all&type=article&api-key=111707b7-de98-4bfe-a923-9dd8d04abab7')
-                .get()
-                .reply(200, { body: news  });
-
             const store = createMockStore({ news: [] });
             const action = actions.getLatestNews();
 
@@ -127,91 +91,11 @@ describe('Actions', () => {
                 .then(() => { // return of async actions
                     const mockActions = store.getActions();
 
-                        expect(mockActions[0].type).toEqual(types.ADD_LASTEST_NEWS);
-                        expect(mockActions[0].news.length).toEqual(2);
-                        expect(mockActions[0].news[0].title).toEqual('news1');
+                    expect(mockActions[0].type).toEqual(types.ADD_LASTEST_NEWS);
+                    expect(mockActions[0].news.length).toEqual(2);
+                    expect(mockActions[0].news[0].title).toEqual('news1');
                 });
-
-            // store.dispatch(action).then(() => {
-            //     const mockActions = store.getActions();
-            //
-            //     expect(mockActions[0].type).toEqual(types.ADD_LASTEST_NEWS);
-            //     expect(mockActions[0].news.length).toEqual(2);
-            //     expect(mockActions[0].news[0].title).toEqual('news1');
-            //
-            //     done();
-            // }, done);
-
         });
 
     });
 });
-
-
-
-
-
-//
-// export const getLatestNews = () => {
-//     return (dispatch, getState) => {
-//         theGuardianAPI.getLastNews().then((res) => {
-//             let newsArray = [];
-//             let i = 0;
-//
-//             res.forEach((news) => {
-//                 newsArray.push({
-//                     newsId: i++,
-//                     ...news
-//                 })
-//             });
-//             dispatch(addLastestNews(newsArray));
-//         }).catch((error) => {
-//             console.log("could not get the lastest news" + error);
-//         });
-//     };
-// };
-//
-// /// Actions linked to user saved articles management
-//
-
-// export const startAddArticle = (articleContent) => {
-//     return (dispatch, getState) => {
-//         let article = {
-//             articleContent
-//         };
-//
-//         console.log('woot', article);
-//
-//         let uid = getState().auth.uid;
-//         let articleRef = firebaseRef.child(`users/${uid}/articles`).push(article);
-//
-//         return articleRef.then(() => {
-//             dispatch(addArticleItem({
-//                 ...article,
-//                 id: articleRef.key
-//             }));
-//         });
-//     };
-// };
-//
-
-//
-// export const getArticles = () => {
-//     return (dispatch, getState) => {
-//         let uid = getState().auth.uid;
-//         let articlesRef = firebaseRef.child(`users/${uid}/articles`);
-//
-//         return articlesRef.once('value').then((snapshot) => {
-//             let articles = snapshot.val() || {};
-//             let articlesArray = [];
-//
-//             Object.keys(articles).forEach((articleId) => {
-//                 articlesArray.push({
-//                     id: articleId,
-//                     ...articles[articleId]
-//                 });
-//             });
-//             dispatch(addArticles(articlesArray));
-//         });
-//     };
-// };

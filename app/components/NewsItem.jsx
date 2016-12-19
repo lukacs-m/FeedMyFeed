@@ -13,7 +13,7 @@ const NewsItem = (props) => {
         <div className="row news-item" data-equalizer-watch>
             <div className="large-12 columns">
                 <h5>
-                    <Link to={{ pathname: `/news/${newsId}`, state: { fields: fields } }}> { webTitle } </Link>
+                    <Link to={{ pathname: `/item/${newsId}`, state: { fields: fields } }}> { webTitle } </Link>
                 </h5>
             </div>
             <div className="large-6 columns">
@@ -29,7 +29,7 @@ const NewsItem = (props) => {
                 </p>
                 <p className="text-justify"  dangerouslySetInnerHTML={{ __html: fields.trailText}}/>
                 <p className="read-more-button  ">
-                    <Link to={{ pathname: `/news/${newsId}`, state: { fields: fields } }}> Read more </Link>
+                    <Link to={{ pathname: `/item/${newsId}`, state: { fields: fields } }}> Read more </Link>
                 </p>
             </div>
         </div>

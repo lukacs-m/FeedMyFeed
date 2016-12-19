@@ -9,7 +9,7 @@ import firebase from "app/firebase/";
 
 let requireLogin = (nextState, replace, next) => {
     if (!firebase.auth().currentUser) {
-        replace('/');
+        replace('/login');
     }
     next();
 };
@@ -24,10 +24,12 @@ let redirectIfLoggedIn = (nextState, replace, next) => {
 export default (
     <Router history={ hashHistory }>
         <Route path="/" component={ MainApp }>
-            <Route path="news" component={ News } onEnter={ requireLogin }/>
-            <Route path="news/:id" component={ Item}  onEnter={ requireLogin }/>
+            <Route path="news">
+                <IndexRoute component={ News } onEnter={ requireLogin } />
+            </Route>
+            <Route path="item/:id" component={ Item } onEnter={ requireLogin }/>
             <Route path="articles" component={ Articles } onEnter={ requireLogin }/>
-            <IndexRoute component={ Login } onEnter={ redirectIfLoggedIn }/>
+            <Route path="login" component={ Login } onEnter={ redirectIfLoggedIn }/>
         </Route>
     </Router>
 );

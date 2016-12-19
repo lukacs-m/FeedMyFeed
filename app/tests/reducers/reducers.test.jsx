@@ -54,7 +54,7 @@ describe('Reducers', () => {
             }];
 
             const action = {
-                type: LOGOUT
+                type: types.LOGOUT
             };
 
             const res = reducers.newsReducer(deepFreeze(news), deepFreeze(action));
@@ -116,8 +116,8 @@ describe('Reducers', () => {
         });
 
 
-        it('should remove lastest news on Logout', () => {
-            const news = [{
+        it('should remove acticles on Logout', () => {
+            const articles = [{
                 id: '111',
                 text: 'anything',
             }];
@@ -126,7 +126,7 @@ describe('Reducers', () => {
                 type: types.LOGOUT
             };
 
-            const res = reducers.articlesReducer(deepFreeze(news), deepFreeze(action));
+            const res = reducers.articlesReducer(deepFreeze(articles), deepFreeze(action));
 
             expect(res.length).toEqual(0);
         });
