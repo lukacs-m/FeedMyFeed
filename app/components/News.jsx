@@ -9,6 +9,7 @@ export class News extends Component {
         let renderNewsItems = () => {
 
             return news.map((newsItem) => {
+                console.log('newsid',newsItem.id.toString() );
                 return (
                     <div className="column" key={ newsItem.id.toString() } >
                         <NewsItem { ...newsItem } />

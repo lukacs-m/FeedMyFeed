@@ -1,4 +1,4 @@
-let axios = require('axios');
+import axios from 'axios';
 const THE_GUADIAN_API_URL = 'https://content.guardianapis.com/search?show-fields=all&type=article&api-key=' + process.env.GUARDIANKEY;
 
 module.exports = {
@@ -8,7 +8,6 @@ module.exports = {
             if(res.status !== 200 && res.statusText !== "OK"){
                 throw new Error(res.data.message);
             } else {
-                console.log("la reponse est", res);
                 return res.data.response.results;
             }
         }, (err) => {

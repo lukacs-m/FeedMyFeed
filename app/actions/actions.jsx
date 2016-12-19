@@ -1,12 +1,21 @@
 import theGuardianAPI from "theGuardianApi";
-import {firebaseRef, githubProvider, googleProvider, facebookProvider} from "app/firebase/";
+import { firebaseRef, githubProvider, googleProvider, facebookProvider } from "app/firebase/";
+import {
+    LOGIN,
+    LOGOUT,
+    ADD_LASTEST_NEWS,
+    ADD_ARTICLE_ITEM,
+    ADD_ARTICLES,
+    REMOVE_ARTICLE_ITEM
+} from 'actionTypes';
+
 
 
 /// Actions linked to Login Logout
 
 /**
  *
- * @param account
+ * @param accountType
  * @returns {function(*, *)}
  */
 
@@ -45,7 +54,7 @@ export const startLogin = (accountType) => {
 
 export const login = (uid) => {
     return {
-        type: 'LOGIN',
+        type: LOGIN,
         uid
     };
 };
@@ -57,11 +66,14 @@ export const login = (uid) => {
  */
 export const logout = () => {
     return {
-        type: 'LOGOUT'
+        type: LOGOUT
     };
 };
 
-
+/**
+ *
+ * @returns {function(*, *)}
+ */
 export let startLogout = () => {
     return (dispatch, getState) => {
         return firebase.auth().signOut().then(() => {
@@ -72,9 +84,14 @@ export let startLogout = () => {
 
 ///Actions linked to news items management
 
+/**
+ *
+ * @param news
+ * @returns {{type: string, news: *}}
+ */
 export let addLastestNews = (news) => {
     return {
-        type: 'ADD_LASTEST_NEWS',
+        type: ADD_LASTEST_NEWS,
         news
     };
 };
@@ -102,7 +119,7 @@ export let getLatestNews = () => {
 
 export let addArticleItem = (article) => {
     return {
-        type: 'ADD_ARTICLE_ITEM',
+        type: ADD_ARTICLE_ITEM,
         article
     };
 };
@@ -112,13 +129,11 @@ export let startAddArticle = (articleContent) => {
         let article = {
             articleContent
         };
-
-        console.log('woot', article);
-
         let uid = getState().auth.uid;
         let articleRef = firebaseRef.child(`users/${uid}/articles`).push(article);
 
         return articleRef.then(() => {
+            console.log("id de l'article", articleRef.key);
             dispatch(addArticleItem({
                 ...article,
                 id: articleRef.key
@@ -129,11 +144,16 @@ export let startAddArticle = (articleContent) => {
 
 export let addArticles = (articles) => {
     return {
-        type: 'ADD_ARTICLES',
+        type: ADD_ARTICLES,
         articles
     };
 };
 
+
+/**
+ *
+ * @returns {function(*, *)}
+ */
 export let getArticles = () => {
     return (dispatch, getState) => {
         let uid = getState().auth.uid;
@@ -151,5 +171,24 @@ export let getArticles = () => {
             });
             dispatch(addArticles(articlesArray));
         });
+    };
+};
+
+export let startDeleteArticle = (id) => {
+    return (dispatch, getState) => {
+        let uid = getState().auth.uid;
+        let articleRef = firebaseRef.child(`users/${uid}/articles/${id}`);
+
+        return articleRef.remove().then(() => {
+            dispatch(removeArticle(id));
+        });
+    };
+};
+
+
+export let removeArticle = (id) => {
+    return {
+        type: REMOVE_ARTICLE_ITEM,
+        id
     };
 };

@@ -1,49 +1,76 @@
+import {
+    LOGIN,
+    LOGOUT,
+    ADD_LASTEST_NEWS,
+    ADD_ARTICLE_ITEM,
+    ADD_ARTICLES,
+    REMOVE_ARTICLE_ITEM
+} from 'actionTypes';
+
+/**
+ *
+ * @param state
+ * @param action
+ * @returns {*}
+ */
 export let authentificationReducer = (state = {}, action) => {
     switch (action.type) {
-        case 'LOGIN':
+        case LOGIN:
             return {
                 uid: action.uid
             };
-        case 'LOGOUT':
+        case LOGOUT:
             return {};
         default:
             return state;
     }
 };
 
+/**
+ *
+ * @param state
+ * @param action
+ * @returns {*}
+ */
 export let newsReducer = (state = [], action) => {
     switch (action.type) {
-        case 'ADD_LASTEST_NEWS':
+        case ADD_LASTEST_NEWS:
             return [
                 ...state,
                 ...action.news
             ];
-        case 'LOGOUT':
+        case LOGOUT:
             return [];
         default:
             return state;
     }
 };
 
+/**
+ *
+ * @param state
+ * @param action
+ * @returns {*}
+ */
 export let articlesReducer = (state = [], action) => {
     switch (action.type) {
-        case 'ADD_ARTICLE_ITEM':
+        case ADD_ARTICLE_ITEM:
             return [
                 ...state,
                 action.article
             ];
-        case 'ADD_ARTICLES':
+        case ADD_ARTICLES:
             return [
                 ...state,
                 ...action.articles
             ];
-        case 'DELETE_ARTICLE_ITEM':
+        case REMOVE_ARTICLE_ITEM:
             return state.filter((article) => {
                 if (article.id !== action.id){
                     return article;
                 }
             });
-        case 'LOGOUT':
+        case LOGOUT:
             return [];
         default:
             return state;

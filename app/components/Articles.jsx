@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NewsItem } from 'NewsItem';
+import  ArticleItem  from 'ArticleItem';
 
 export class Articles extends Component {
     render () {
@@ -10,8 +10,9 @@ export class Articles extends Component {
             return articles.map((articlesItem) => {
                 let displayArticle = articlesItem.articleContent;
                 console.log("articels items", displayArticle);
+                console.log("article id", articlesItem.id.toString());
                 return (
-                    <NewsItem  key={ articlesItem.id.toString()} { ...displayArticle } />
+                    <ArticleItem  key={ articlesItem.id.toString()} articleId={ articlesItem.id } { ...displayArticle } />
                 );
             });
         };
@@ -19,11 +20,9 @@ export class Articles extends Component {
         return (
             <div>
                 <h1 className="page-title">Your saved articles</h1>
-                {/*<div className="row small-up-1 medium-up-2 large-up-2">*/}
-                    <div className="column small-centered small-12" >
-                        { renderArticlesItems() }
-                    </div>
-                 {/*</div>*/}
+                <div className="column small-centered small-12" >
+                    { renderArticlesItems() }
+                </div>
             </div>
         );
     }

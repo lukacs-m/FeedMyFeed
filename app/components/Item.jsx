@@ -5,7 +5,6 @@ import * as actions from "actions";
 export class Item extends Component {
     addArticle () {
         let {dispatch, newsItem} = this.props;
-        console.log("article", newsItem);
         dispatch(actions.startAddArticle(newsItem));
     }
 

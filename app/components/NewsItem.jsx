@@ -10,7 +10,6 @@ const NewsItem = (props) => {
         return date[0];
     };
     return (
-
         <div className="row news-item">
             <div className="large-12 columns">
                 <h5>
@@ -23,12 +22,12 @@ const NewsItem = (props) => {
                 </p>
             </div>
             <div className="large-6 columns">
-                <p>
-                    <span><i > {fields.byline} &nbsp;</i></span>
-                    <span><i > { renderDate() } &nbsp;</i></span>
-                    <span><i > { sectionName }</i></span>
+                <p className="sub-infos">
+                    <span><i> {fields.byline} &nbsp;</i></span>
+                    <span><i> { renderDate() } &nbsp;</i></span>
+                    <span><i> { sectionName }</i></span>
                 </p>
-                <p className="text-justify">{ fields.trailText }</p>
+                <p className="text-justify"  dangerouslySetInnerHTML={{ __html: fields.trailText}}/>
                 <p>
                     <Link to={{ pathname: `/news/${newsId}`, state: { fields: fields } }}> Read more </Link>
                 </p>
