@@ -1,7 +1,6 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
-
-import {authentificationReducer, newsReducer, articlesReducer} from 'reducers';
+import { authentificationReducer, newsReducer, articlesReducer } from 'reducers';
 
 export const configure = (initialState = {}) => {
     let reducer = redux.combineReducers({

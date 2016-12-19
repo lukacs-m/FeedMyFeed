@@ -8,8 +8,22 @@ export class Item extends Component {
         dispatch(actions.startAddArticle(newsItem));
     }
 
+    componentWillMount() {
+        window.scrollTo(0, 0);
+    }
+
     render () {
         let { newsItem } = this.props;
+
+        let renderAddArticleButton = () => {
+            if (!newsItem.article){
+                return (
+                    <button className="add-button button" onClick={ this.addArticle.bind(this) }> Add to your articles
+                    </button>
+                );
+            }
+        };
+
         return (
             <div>
                 <div className="row item">
@@ -21,8 +35,7 @@ export class Item extends Component {
                         <div className="text-justify" dangerouslySetInnerHTML={{ __html: newsItem.fields.body }}/>
                     </div>
                 </div>
-                <button className="add-button button" onClick={ this.addArticle.bind(this) }> Add to your articles
-                </button>
+                { renderAddArticleButton() }
             </div>
         );
     }
@@ -30,8 +43,15 @@ export class Item extends Component {
 
 export default connect(
     (state, stateProps) => {
+        let { article } = stateProps.location.query;
+        let newsItem = {};
+        if (article === undefined){
+            newsItem = { ...state.news[stateProps.params.id], article: false };
+        } else {
+            newsItem = { ...state.articles[stateProps.params.id].articleContent, article: true };
+        }
         return {
-            newsItem: state.news[stateProps.params.id]
+            newsItem
         };
     }
 )(Item);

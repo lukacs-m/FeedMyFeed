@@ -1,12 +1,13 @@
 import expect from 'expect';
 import deepFreeze from 'deep-freeze-strict';
 import * as reducers from 'reducers';
+import * as types from 'actionTypes';
 
 describe('Reducers', () => {
     describe('authentificationReducer', () => {
         it('should store uid on LOGIN', () => {
             const action = {
-                type: 'LOGIN',
+                type: types.LOGIN,
                 uid: 'abc123'
             };
             const res = reducers.authentificationReducer(undefined, deepFreeze(action));
@@ -21,7 +22,7 @@ describe('Reducers', () => {
                 uid: 'testuid'
             };
             const action = {
-                type: 'LOGOUT'
+                type: types.LOGOUT
             };
             const res = reducers.authentificationReducer(deepFreeze(authData), deepFreeze(action));
 
@@ -37,7 +38,7 @@ describe('Reducers', () => {
             }];
 
             const action = {
-                type: 'ADD_LASTEST_NEWS',
+                type: types.ADD_LASTEST_NEWS,
                 news
             };
             const res = reducers.newsReducer(deepFreeze([]), deepFreeze(action));
@@ -53,7 +54,7 @@ describe('Reducers', () => {
             }];
 
             const action = {
-                type: 'LOGOUT'
+                type: LOGOUT
             };
 
             const res = reducers.newsReducer(deepFreeze(news), deepFreeze(action));
@@ -65,7 +66,7 @@ describe('Reducers', () => {
     describe('articlesReducer', () => {
         it('should add an article item', ()=> {
             const action = {
-                type: 'ADD_ARTICLE_ITEM',
+                type: types.ADD_ARTICLE_ITEM,
                 article: {
                     id: 'abc123',
                     text: 'Something to do',
@@ -84,7 +85,7 @@ describe('Reducers', () => {
             }];
 
             const action = {
-                type: 'ADD_ARTICLES',
+                type: types.ADD_ARTICLES,
                 articles
             };
 
@@ -105,7 +106,7 @@ describe('Reducers', () => {
             ];
 
             const action = {
-                type: 'DELETE_ARTICLE_ITEM',
+                type: types.REMOVE_ARTICLE_ITEM,
                 id: 222
             };
             const res = reducers.articlesReducer(deepFreeze(articles), deepFreeze(action));
@@ -122,7 +123,7 @@ describe('Reducers', () => {
             }];
 
             const action = {
-                type: 'LOGOUT'
+                type: types.LOGOUT
             };
 
             const res = reducers.articlesReducer(deepFreeze(news), deepFreeze(action));

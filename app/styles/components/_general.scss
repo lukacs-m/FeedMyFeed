@@ -1,0 +1,22 @@
+/// GENERAL DISPLAY COMPONENT
+
+body{
+  background-color: $main-background-color;
+}
+
+
+/// Main button display
+.main-button{
+  &, a{
+    border: 1px solid $main-orange-color;
+    padding: 10px;
+    margin: 10px;
+    color: $main-orange-color;
+    text-align: center;
+  }
+
+  &:hover, a:hover{
+    color:$black;
+    background-color: $main-orange-color;
+  }
+}

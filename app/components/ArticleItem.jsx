@@ -6,18 +6,16 @@ import * as actions from 'actions';
 export class ArticleItem extends Component {
     removeArticle () {
          let { dispatch, articleId } = this.props;
-         console.log("this props", this.props);
         dispatch(actions.startDeleteArticle(articleId));
     }
 
     render () {
-        let { sectionName, webTitle, fields, newsId } = this.props;
-
+        let { sectionName, webTitle, fields, position } = this.props;
         return (
-            <div className="row news-item">
+            <div className="row article-item">
                 <div className="large-12 columns text-center">
                     <h5>
-                        <Link to={{ pathname: `/news/${newsId}`, state: { fields: fields } }}> { webTitle } </Link>
+                        <Link to={{ pathname: `/news/${ position }`, state: { fields: fields } }}> { webTitle } </Link>
                     </h5>
                 </div>
                 <div className="large-6 columns">
@@ -26,15 +24,16 @@ export class ArticleItem extends Component {
                     </p>
                 </div>
                 <div className="large-6 columns">
-                    <p>
-                        <span><i > {fields.byline} &nbsp;</i></span>
-                        <span><i > { sectionName }</i></span>
+                    <p className="sub-infos">
+                        <span><i> { fields.byline } &nbsp;</i></span>
+                        <span><i> { sectionName }</i></span>
                     </p>
                     <p className="text-justify"  dangerouslySetInnerHTML={{ __html: fields.trailText}}/>
                     <p>
-                        <Link to={{ pathname: `/news/${newsId}`, state: { fields: fields } }}> Read more </Link>
-                        <button className="button" onClick={ this.removeArticle.bind(this)}> Remove this article from your list</button>
+                        <Link className="main-button" to={{ pathname: `/news/${ position }`, query: {article: "true" }, state: { fields: fields } }}> Read more </Link>
+                        <button className="main-button" onClick={ this.removeArticle.bind(this)}> Remove this article from your list</button>
                     </p>
+
                 </div>
             </div>
         );

@@ -1,0 +1,29 @@
+.article-item{
+  margin-bottom: 2rem;
+  p{
+    color:white;
+  }
+
+  .sub-infos{
+    font-size: 15px;
+    font-style: bold;
+    color:white;
+  }
+
+  .read-more-button{
+    a {
+      padding: 10px;
+      border: 1px solid $main-orange-color;
+      color: $main-orange-color;
+    }
+  }
+
+  h5 {
+    margin-bottom: 20px ;
+    a {
+      font-weight: bold;
+      font-size: 27px;
+      color: $main-grey-color ;
+    }
+  }
+}

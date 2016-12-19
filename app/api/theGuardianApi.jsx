@@ -1,6 +1,10 @@
 import axios from 'axios';
 const THE_GUADIAN_API_URL = 'https://content.guardianapis.com/search?show-fields=all&type=article&api-key=' + process.env.GUARDIANKEY;
 
+/**
+ *
+ * @type {{getLastNews: (()), getNews: ((p1?:*))}}
+ */
 module.exports = {
     getLastNews: () => {
         const requestUrl = `${THE_GUADIAN_API_URL}`;
@@ -14,7 +18,7 @@ module.exports = {
             throw new Error(err.data.message);
         })
     },
-    getNews: function(subject){
+    getNews: (subject) => {
         const encodedsubject = encodeURIComponent(subject);
         let requestUrl = `${THE_GUADIAN_API_URL}&q=${encodedsubject}`;
 

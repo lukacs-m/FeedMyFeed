@@ -28,7 +28,6 @@ export class Login extends Component {
                             <p>
                                 Login with One of the Accounts below
                             </p>
-
                         </div>
                         <div className="row">
                             <div className="button-login">

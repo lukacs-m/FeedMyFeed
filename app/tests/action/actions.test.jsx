@@ -1,8 +1,9 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import expect from 'expect';
-// import firebase, {firebaseRef} from 'app/firebase/';
-import * as actions from 'actions';
+import nock from 'nock';
+import * as actions from '../../actions/actions';
+import * as types from '../../utils/actionTypes';
 
 let createMockStore = configureMockStore([thunk]);
 
@@ -10,7 +11,7 @@ describe('Actions', () => {
 
     it('should generate login action object', () => {
         const action = {
-            type: 'LOGIN',
+            type: types.LOGIN,
             uid: '123abc'
         };
 
@@ -20,7 +21,7 @@ describe('Actions', () => {
 
     it('should generate logout action object', () => {
         const action = {
-            type: 'LOGOUT'
+            type: types.LOGOUT
         };
 
         const res = actions.logout();
@@ -30,7 +31,7 @@ describe('Actions', () => {
     it('should generate a addLatestNews action object', () => {
 
         const action = {
-            type: 'ADD_LASTEST_NEWS',
+            type: types.ADD_LASTEST_NEWS,
             news: {
                 id: 1,
                 title: "test"
@@ -43,7 +44,7 @@ describe('Actions', () => {
 
     it('should generate a addArticlesItem action object', () => {
         const action = {
-            type: 'ADD_ARTICLE_ITEM',
+            type: types.ADD_ARTICLE_ITEM,
             article: {
                 id: 1,
                 title: "article"
@@ -56,7 +57,7 @@ describe('Actions', () => {
 
     it('should generate a addArticles action object', () => {
         const action = {
-            type: 'ADD_ARTICLES',
+            type: types.ADD_ARTICLES,
             articles: [{
                 id: 1,
                 title: "article"
@@ -72,49 +73,83 @@ describe('Actions', () => {
         expect(res).toEqual(action)
     });
 
+    describe('Async actions', () => {
+
+        afterEach(() => {
+            nock.cleanAll()
+        });
+
+        it('should get lastest news', ()=> {
+            const news =  [
+                {
+                    title: "news1"
+                },
+                {
+                    title: "news20"
+                }
+            ];
+
+            // fetch(`http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${search}&api_key=abc123&format=json&limit=5`)
+            // nock('http://ws.audioscrobbler.com')
+            //     .get('/2.0/')
+            //     .query({
+            //         method: 'artist.search',
+            //         artist: 'bob',
+            //         api_key: 'somekey123',
+            //         format: 'json',
+            //         limit: '5'
+            //     })
+            //     .reply(200, {fake: true})
+
+            // nock.recorder.rec({
+            //     dont_print: false
+            // });
+            //
+            // var nockCalls = nock.recorder.play();
+            //
+            // nock('https://content.guardianapis.com')
+            //     .get("/search")
+            //     .query({
+            //         'show-fields':'all',
+            //         type:'article',
+            //         'api-key':'111707b7-de98-4bfe-a923-9dd8d04abab7'
+            //     }).reply(200, { body: { news } });
+
+
+            nock('https://content.guardianapis.com/search?show-fields=all&type=article&api-key=111707b7-de98-4bfe-a923-9dd8d04abab7')
+                .get()
+                .reply(200, { body: news  });
+
+            const store = createMockStore({ news: [] });
+            const action = actions.getLatestNews();
+
+            return store.dispatch(action)
+                .then(() => { // return of async actions
+                    const mockActions = store.getActions();
+
+                        expect(mockActions[0].type).toEqual(types.ADD_LASTEST_NEWS);
+                        expect(mockActions[0].news.length).toEqual(2);
+                        expect(mockActions[0].news[0].title).toEqual('news1');
+                });
+
+            // store.dispatch(action).then(() => {
+            //     const mockActions = store.getActions();
+            //
+            //     expect(mockActions[0].type).toEqual(types.ADD_LASTEST_NEWS);
+            //     expect(mockActions[0].news.length).toEqual(2);
+            //     expect(mockActions[0].news[0].title).toEqual('news1');
+            //
+            //     done();
+            // }, done);
+
+        });
+
+    });
 });
 
 
 
 
-// export const startLogin = (accountType) => {
-//     return (dispatch, getState) => {
-//         switch (accountType) {
-//             case 'github':
-//                 return firebase.auth().signInWithPopup(githubProvider).then((result) => {
-//                     console.log(' github auth worked', result);
-//                 }).catch((error) => {
-//                     console.log("Unable to auth with github", error);
-//                 });
-//             case 'google':
-//                 return firebase.auth().signInWithPopup(googleProvider).then((result) => {
-//                     console.log('google auth worked', result);
-//                 }).catch((error) => {
-//                     console.log("Unable to auth google ", error);
-//                 });
-//             case 'facebook':
-//                 return firebase.auth().signInWithPopup(facebookProvider).then((result) => {
-//                     console.log('auth worked', result);
-//                 }).catch((error) => {
-//                     console.log("Unable to auth", error);
-//                 });
-//             default:
-//                 return console.log("Unable to auth", error);
-//         }
-//     };
-// };
-//
-
-
-//
-// export const startLogout = () => {
-//     return (dispatch, getState) => {
-//         return firebase.auth().signOut().then(() => {
-//             console.log('Logged out!');
-//         });
-//     };
-// };
-//
 
 //
 // export const getLatestNews = () => {

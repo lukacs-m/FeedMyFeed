@@ -1,24 +1,16 @@
 import theGuardianAPI from "theGuardianApi";
 import { firebaseRef, githubProvider, googleProvider, facebookProvider } from "app/firebase/";
-import {
-    LOGIN,
-    LOGOUT,
-    ADD_LASTEST_NEWS,
-    ADD_ARTICLE_ITEM,
-    ADD_ARTICLES,
-    REMOVE_ARTICLE_ITEM
-} from 'actionTypes';
+import * as types from 'actionTypes';
 
 
 
 /// Actions linked to Login Logout
 
 /**
- *
+ * Action enabling the user to login
  * @param accountType
  * @returns {function(*, *)}
  */
-
 export const startLogin = (accountType) => {
     return (dispatch, getState) => {
         switch (accountType) {
@@ -47,31 +39,30 @@ export const startLogin = (accountType) => {
 };
 
 /**
- *
- * @param uid
+ * Action
+ * @param uid the uid of the user account
  * @returns {{type: string, uid: *}}
  */
-
 export const login = (uid) => {
     return {
-        type: LOGIN,
+        type: types.LOGIN,
         uid
     };
 };
 
 
 /**
- *
+ * Action dispatch when user logs out
  * @returns {{type: string}}
  */
 export const logout = () => {
     return {
-        type: LOGOUT
+        type: types.LOGOUT
     };
 };
 
 /**
- *
+ * action that logout the user from his firebase account
  * @returns {function(*, *)}
  */
 export let startLogout = () => {
@@ -85,20 +76,24 @@ export let startLogout = () => {
 ///Actions linked to news items management
 
 /**
- *
- * @param news
+ * Action dispatch to fill up the store with the latest news
+ * @param news An array containing the lastest news gather from the guardian api
  * @returns {{type: string, news: *}}
  */
 export let addLastestNews = (news) => {
     return {
-        type: ADD_LASTEST_NEWS,
+        type: types.ADD_LASTEST_NEWS,
         news
     };
 };
 
+/**
+ * Action that goes and fetches that last news articles from the guardian api
+ * @returns {function(*, *)}
+ */
 export let getLatestNews = () => {
     return (dispatch, getState) => {
-        theGuardianAPI.getLastNews().then((res) => {
+       return theGuardianAPI.getLastNews().then((res) => {
             let newsArray = [];
             let i = 0;
 
@@ -117,41 +112,57 @@ export let getLatestNews = () => {
 
 /// Actions linked to user saved articles management
 
+/**
+ * Action dispatch when a user wants to save a article to his firebase account
+ * @param article An object containing the acticle informations
+ * @returns {{type: *, article: *}}
+ */
 export let addArticleItem = (article) => {
     return {
-        type: ADD_ARTICLE_ITEM,
+        type: types.ADD_ARTICLE_ITEM,
         article
     };
 };
 
+/**
+ * Action that saves the current article information to a firebase database
+ * @param articleContent An object with the article's content
+ * @returns {function(*, *)}
+ */
 export let startAddArticle = (articleContent) => {
     return (dispatch, getState) => {
         let article = {
             articleContent
         };
         let uid = getState().auth.uid;
+        const nbOfArticles = getState().articles.length;
         let articleRef = firebaseRef.child(`users/${uid}/articles`).push(article);
 
         return articleRef.then(() => {
-            console.log("id de l'article", articleRef.key);
             dispatch(addArticleItem({
                 ...article,
-                id: articleRef.key
+                id: articleRef.key,
+                position: nbOfArticles
             }));
         });
     };
 };
 
+/**
+ * Action dispatched to fill up the store with the user's saved articles
+ * @param articles the articles to add into the store
+ * @returns {{type: *, articles: *}}
+ */
 export let addArticles = (articles) => {
     return {
-        type: ADD_ARTICLES,
+        type: types.ADD_ARTICLES,
         articles
     };
 };
 
 
 /**
- *
+ * Action that goes and fetches the user's saved articles on his firebase account
  * @returns {function(*, *)}
  */
 export let getArticles = () => {
@@ -162,11 +173,17 @@ export let getArticles = () => {
         return articlesRef.once('value').then((snapshot) => {
             let articles = snapshot.val() || {};
             let articlesArray = [];
+            let i = 0;
 
             Object.keys(articles).forEach((articleId) => {
                 articlesArray.push({
                     id: articleId,
-                    ...articles[articleId]
+                    position: i,
+                    ...articles[articleId],
+                    articleContent:{
+                        ...articles[articleId].articleContent,
+                        newsId: i++
+                    }
                 });
             });
             dispatch(addArticles(articlesArray));
@@ -174,6 +191,11 @@ export let getArticles = () => {
     };
 };
 
+/**
+ * Action that removes and articles from the user's fireabse account
+ * @param id the id of the article to remove
+ * @returns {function(*, *)}
+ */
 export let startDeleteArticle = (id) => {
     return (dispatch, getState) => {
         let uid = getState().auth.uid;
@@ -185,10 +207,14 @@ export let startDeleteArticle = (id) => {
     };
 };
 
-
+/**
+ * Action that enables the removal of a user articles from store
+ * @param id the id of the article to remove from database
+ * @returns {{type: *, id: *}}
+ */
 export let removeArticle = (id) => {
     return {
-        type: REMOVE_ARTICLE_ITEM,
+        type: types.REMOVE_ARTICLE_ITEM,
         id
     };
 };

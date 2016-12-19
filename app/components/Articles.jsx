@@ -8,18 +8,16 @@ export class Articles extends Component {
 
         let renderArticlesItems = () => {
             return articles.map((articlesItem) => {
-                let displayArticle = articlesItem.articleContent;
-                console.log("articels items", displayArticle);
-                console.log("article id", articlesItem.id.toString());
+                let { articleContent, id, position } = articlesItem;
                 return (
-                    <ArticleItem  key={ articlesItem.id.toString()} articleId={ articlesItem.id } { ...displayArticle } />
+                    <ArticleItem  key={ id.toString()} articleId={ id } position={ position } { ...articleContent } />
                 );
             });
         };
 
         return (
             <div>
-                <h1 className="page-title">Your saved articles</h1>
+                <h1 className="page-title">Your Articles</h1>
                 <div className="column small-centered small-12" >
                     { renderArticlesItems() }
                 </div>
