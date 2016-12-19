@@ -12,7 +12,7 @@ export class Item extends Component {
         let { newsItem } = this.props;
         return (
             <div>
-                <div className="row">
+                <div className="row item">
                     <div className="small-12 medium-10 large-8 small-centered columns">
                         <h3>{ newsItem.webTitle }</h3>
                         <div className="text-justify item-standfirst"

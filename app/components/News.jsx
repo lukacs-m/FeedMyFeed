@@ -9,9 +9,8 @@ export class News extends Component {
         let renderNewsItems = () => {
 
             return news.map((newsItem) => {
-                console.log('newsid',newsItem.id.toString() );
                 return (
-                    <div className="column" key={ newsItem.id.toString() } >
+                    <div className="column" key={ newsItem.id.toString() } data-equalizer-watch>
                         <NewsItem { ...newsItem } />
                     </div>
                 );
@@ -21,7 +20,7 @@ export class News extends Component {
         return (
             <div>
                 <h1 className="page-title">The Guardian Lastest news</h1>
-                <div className="row small-up-1 medium-up-2 large-up-2">
+                <div className="row small-up-1 medium-up-2 large-up-2 news " data-equalizer data-equalize-by-row="true">
                     { renderNewsItems() }
                 </div>
             </div>

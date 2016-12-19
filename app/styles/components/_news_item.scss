@@ -5,5 +5,19 @@
     font-size: 15px;
     font-style: bold;
   }
+
+  .read-more-button{
+    a {
+      padding: 10px;
+      border: 1px solid $main-orange-color;
+      color: $main-orange-color;
+    }
+  }
+
+  h5 {
+    a {
+      color: $main-grey-color ;
+    }
+  }
 }
 
