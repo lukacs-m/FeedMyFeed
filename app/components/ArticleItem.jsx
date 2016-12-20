@@ -3,7 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import * as actions from 'actions';
 
+/**
+ * Component that takes care of the logic of the user's article display
+ */
 export class ArticleItem extends Component {
+    /**
+     * Function that dispatches an action to delete and article of the user
+     */
     removeArticle () {
          let { dispatch, articleId } = this.props;
         dispatch(actions.startDeleteArticle(articleId));

@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NewsItem } from "NewsItem";
 
+/**
+ * Component that takes care of rendering the list of lastest  guardian news
+ */
 export class News extends Component {
     render () {
         let { news } = this.props;

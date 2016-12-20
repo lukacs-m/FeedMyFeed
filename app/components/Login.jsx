@@ -5,7 +5,9 @@ import imgFacebook from "resources/icons/facebook color.1.svg";
 import imgGithub from "resources/icons/github color.1.svg";
 import imgGoogle from "resources/icons/google color.1.svg";
 
-
+/**
+ * Component that takes care of the logic of logging in
+ */
 export class Login extends Component {
 
     constructor (props) {

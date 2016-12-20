@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import * as actions from 'actions';
 let store = require('configureStore').configure();
 import firebase from "app/firebase";
@@ -13,16 +13,20 @@ $(document).foundation();
 //App css
 require('style!css!sass!applicationStyles');
 
+/**
+ * Function that listen to the status of the user's firebase authentification
+ * It redirect depending on auth status
+ */
 firebase.auth().onAuthStateChanged((user) => {
     loadScreen();
     if (user) {
         store.dispatch(actions.login(user.uid));
         store.dispatch(actions.getLatestNews());
         store.dispatch(actions.getArticles());
-        hashHistory.push('/news');
+        browserHistory.push('/');
     } else {
         store.dispatch(actions.logout());
-        hashHistory.push('/');
+        browserHistory.push('/login');
     }
 });
 

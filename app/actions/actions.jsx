@@ -16,19 +16,19 @@ export const startLogin = (accountType) => {
         switch (accountType) {
             case 'github':
                 return firebase.auth().signInWithPopup(githubProvider).then((result) => {
-                    console.log(' github auth worked', result);
+                    console.log(' github auth worked', "you're connected");
                 }).catch((error) => {
                     console.log("Unable to auth with github", error);
                 });
             case 'google':
                 return firebase.auth().signInWithPopup(googleProvider).then((result) => {
-                    console.log('google auth worked', result);
+                    console.log('google auth worked', "you're connected");
                 }).catch((error) => {
                     console.log("Unable to auth google ", error);
                 });
             case 'facebook':
                 return firebase.auth().signInWithPopup(facebookProvider).then((result) => {
-                    console.log('auth worked', result);
+                    console.log('auth worked', "you're connected");
                 }).catch((error) => {
                     console.log("Unable to auth", error);
                 });

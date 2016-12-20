@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import  ArticleItem  from 'ArticleItem';
 
+/**
+ * Component that take care of the rendering of the list of articles
+ */
 export class Articles extends Component {
     render () {
         let { articles } = this.props;

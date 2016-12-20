@@ -1,7 +1,11 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import Navigation from "Navigation";
+import { Footer }  from "Footer";
 
+/**
+ * Main Container app component
+ */
 export class MainApp extends Component {
     render () {
         return (
@@ -12,6 +16,7 @@ export class MainApp extends Component {
                         {this.props.children}
                     </div>
                 </div>
+                { this.props.auth.uid ? <Footer/> : null }
             </div>
         );
     }

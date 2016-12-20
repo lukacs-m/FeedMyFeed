@@ -1,15 +1,17 @@
 .top-bar{
 
+  border-bottom: 1px solid $main-orange-color;
+
   &, ul {
-    background-color: $nav-background;
+    background-color: white;
   }
 
   .menu{
     li > a{
-      color: $main-orange-color;
+      color: $main-grey-color;
     }
     .menu-text{
-      color:white;
+      color: $main-orange-color;
       a {
         display: inline;
         padding: 0;

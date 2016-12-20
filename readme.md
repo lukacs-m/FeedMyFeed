@@ -3,7 +3,7 @@ It enables someone to connect to a feed of news articles and then select and kee
 
 To start the project you must:
 
-- Go to the root directory of the project and start the node server with the commend: "node lib/server.js"
+- Go to the root directory of the project and start the node server with the commend: "node server.js"
 
 - Once the server is running you must lanch webpack to bundle the project with the command: "webpack"
 

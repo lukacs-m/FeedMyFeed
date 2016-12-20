@@ -28,10 +28,10 @@ export class Navigation extends Component {
                         <ul className="menu">
                             <li className="menu-text">Feed My Feeds</li>
                             <li>
-                                <IndexLink to="/news" activeClassName="active-link">Home</IndexLink>
+                                <IndexLink to="/" activeClassName="active">Home</IndexLink>
                             </li>
                             <li>
-                                <Link to="/articles" activeClassName="active-link">My Articles</Link>
+                                <Link to="/articles" activeClassName="active">My Articles</Link>
                             </li>
                             <li>
                                 <a href="#" onClick={this.onLogout.bind(this)}>Logout</a>

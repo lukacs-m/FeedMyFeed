@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
+/**
+ * Component that contains the logic to display a nnews list item
+ * @param props the props passsed to the component
+ * @returns {XML}
+ * @constructor
+ */
 const NewsItem = (props) => {
 
     let { sectionName, webPublicationDate, webTitle, fields, newsId } = props;

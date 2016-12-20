@@ -1,13 +1,13 @@
 .article-item{
   margin-bottom: 2rem;
   p{
-    color:white;
+    color:$dark-grey;
   }
 
   .sub-infos{
     font-size: 15px;
     font-style: bold;
-    color:white;
+    color:$main-grey-color;
   }
 
   .read-more-button{
@@ -23,7 +23,7 @@
     a {
       font-weight: bold;
       font-size: 27px;
-      color: $main-grey-color ;
+      color: $dark-grey ;
     }
   }
 }

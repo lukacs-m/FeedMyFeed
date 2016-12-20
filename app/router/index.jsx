@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Router, IndexRoute, hashHistory } from "react-router";
+import { Route, Router, IndexRoute, browserHistory } from "react-router";
 import Login from "Login";
 import MainApp from "MainApp";
 import Articles from "Articles";
@@ -28,20 +28,35 @@ let requireLogin = (nextState, replace, next) => {
  */
 let redirectIfLoggedIn = (nextState, replace, next) => {
     if (firebase.auth().currentUser) {
-        replace('/news');
+        browserHistory.push('/');
     }
     next();
 };
 
+/**
+ * Main router for the application
+ */
+// export default (
+//     <Router history={ browserHistory }>
+//         <Route path="/" component={ MainApp }>
+//             <Route path="news">
+//                 <IndexRoute component={ News } onEnter={ requireLogin } />
+//             </Route>
+//             <Route path="item/:id" component={ Item } onEnter={ requireLogin }/>
+//             <Route path="articles" component={ Articles } onEnter={ requireLogin }/>
+//             <Route path="login" component={ Login } onEnter={ redirectIfLoggedIn }/>
+//         </Route>
+//     </Router>
+// );
+
 export default (
-    <Router history={ hashHistory }>
-        <Route path="/" component={ MainApp }>
-            <Route path="news">
-                <IndexRoute component={ News } onEnter={ requireLogin } />
-            </Route>
+    <Router history={ browserHistory }>
+        <Route  path="/" component={ MainApp } onEnter={ requireLogin } >
+            <IndexRoute component={ News } onEnter={ requireLogin } />
             <Route path="item/:id" component={ Item } onEnter={ requireLogin }/>
             <Route path="articles" component={ Articles } onEnter={ requireLogin }/>
             <Route path="login" component={ Login } onEnter={ redirectIfLoggedIn }/>
         </Route>
     </Router>
 );
+
