@@ -28,7 +28,7 @@ let requireLogin = (nextState, replace, next) => {
  */
 let redirectIfLoggedIn = (nextState, replace, next) => {
     if (firebase.auth().currentUser) {
-        browserHistory.push('/');
+        replace('/');
     }
     next();
 };
@@ -51,7 +51,7 @@ let redirectIfLoggedIn = (nextState, replace, next) => {
 
 export default (
     <Router history={ browserHistory }>
-        <Route  path="/" component={ MainApp } onEnter={ requireLogin } >
+        <Route path="/" component={ MainApp } onEnter={ requireLogin } >
             <IndexRoute component={ News } onEnter={ requireLogin } />
             <Route path="item/:id" component={ Item } onEnter={ requireLogin }/>
             <Route path="articles" component={ Articles } onEnter={ requireLogin }/>

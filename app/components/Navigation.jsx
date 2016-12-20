@@ -19,7 +19,7 @@ export class Navigation extends Component {
         return (
             <div className="top-bar">
                 <div className="top-bar-title">
-                    <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
+                    <span data-responsive-toggle="responsive-menu" data-hide-for="small">
                     <button className="menu-icon dark show-for-small-only" type="button" data-toggle></button>
                     </span>
                 </div>
