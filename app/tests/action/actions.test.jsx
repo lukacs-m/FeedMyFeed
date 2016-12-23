@@ -3,6 +3,9 @@ import thunk from 'redux-thunk';
 import expect from 'expect';
 import * as actions from '../../actions/actions';
 import * as types from '../../utils/actionTypes';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
+import theGuardianAPI from "theGuardianApi";
 
 let createMockStore = configureMockStore([thunk]);
 
@@ -83,6 +86,22 @@ describe('Actions', () => {
                     title: "news20"
                 }
             ];
+            // This sets the mock adapter on the default instance
+            let mock = new MockAdapter(axios);
+            // Mock any GET request to /users
+            // arguments for reply are (status, data, headers)
+            let url = theGuardianAPI.getURl();
+
+            mock.onGet(url).reply(function() {
+                return new Promise(function(resolve, reject) {
+                    resolve([200, {
+                        response:{
+                            results: news
+                        }
+                    }
+                    ]);
+                });
+            });
 
             const store = createMockStore({ news: [] });
             const action = actions.getLatestNews();

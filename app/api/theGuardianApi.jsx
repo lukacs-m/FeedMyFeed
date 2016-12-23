@@ -6,14 +6,18 @@ const THE_GUADIAN_API_URL = 'https://content.guardianapis.com/search?show-fields
  * @type {{getLastNews: (()), getNews: ((p1?:*))}}
  */
 module.exports = {
+
+    getURl:() => `${THE_GUADIAN_API_URL}`,
+
     /**
      * Function that fetches the latest news on the guardian api
      * @returns {axios.Promise}
      */
+
     getLastNews: () => {
         const requestUrl = `${THE_GUADIAN_API_URL}`;
         return axios.get(requestUrl).then((res) => {
-            if(res.status !== 200 && res.statusText !== "OK"){
+             if(res.status !== 200 && res.statusText !== "OK"){
                 throw new Error(res.data.message);
             } else {
                 return res.data.response.results;
