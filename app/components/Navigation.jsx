@@ -19,7 +19,7 @@ export class Navigation extends Component {
         return (
             <div className="top-bar">
                 <div className="top-bar-title">
-                    <span data-responsive-toggle="responsive-menu" data-hide-for="small">
+                    <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
                     <button className="menu-icon dark show-for-small-only" type="button" data-toggle></button>
                     </span>
                 </div>
@@ -28,10 +28,10 @@ export class Navigation extends Component {
                         <ul className="menu">
                             <li className="menu-text">Feed My Feeds</li>
                             <li>
-                                <IndexLink to="/" activeClassName="active">Home</IndexLink>
+                                <IndexLink to="/" activeClassName="active-link">Home</IndexLink>
                             </li>
                             <li>
-                                <Link to="/articles" activeClassName="active">My Articles</Link>
+                                <Link to="/articles" activeClassName="active-link">My Articles</Link>
                             </li>
                             <li>
                                 <a href="#" onClick={this.onLogout.bind(this)}>Logout</a>
@@ -51,4 +51,4 @@ export class Navigation extends Component {
     }
 }
 
-export default connect()(Navigation);
+export default connect(undefined, undefined, undefined, {pure: false})(Navigation);

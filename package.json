@@ -46,6 +46,7 @@
   "devDependencies": {
     "axios-mock-adapter": "^1.7.1",
     "babel-cli": "^6.18.0",
+    "foundation-sites": "6.2.0",
     "karma": "^1.1.2",
     "karma-chrome-launcher": "^1.0.1",
     "karma-mocha": "^1.1.1",
