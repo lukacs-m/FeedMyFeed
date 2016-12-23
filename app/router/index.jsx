@@ -36,27 +36,17 @@ let redirectIfLoggedIn = (nextState, replace, next) => {
 /**
  * Main router for the application
  */
-// export default (
-//     <Router history={ browserHistory }>
-//         <Route path="/" component={ MainApp }>
-//             <Route path="news">
-//                 <IndexRoute component={ News } onEnter={ requireLogin } />
-//             </Route>
-//             <Route path="item/:id" component={ Item } onEnter={ requireLogin }/>
-//             <Route path="articles" component={ Articles } onEnter={ requireLogin }/>
-//             <Route path="login" component={ Login } onEnter={ redirectIfLoggedIn }/>
-//         </Route>
-//     </Router>
-// );
+
 
 export default (
     <Router history={ browserHistory }>
-        <Route path="/" component={ MainApp } onEnter={ requireLogin } >
-            <IndexRoute component={ News } onEnter={ requireLogin } />
+        <Route path="/" component={ MainApp }>
+                <IndexRoute component={ News } onEnter={ requireLogin } />
             <Route path="item/:id" component={ Item } onEnter={ requireLogin }/>
             <Route path="articles" component={ Articles } onEnter={ requireLogin }/>
             <Route path="login" component={ Login } onEnter={ redirectIfLoggedIn }/>
         </Route>
     </Router>
 );
+
 

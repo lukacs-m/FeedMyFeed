@@ -1,5 +1,5 @@
 import theGuardianAPI from "theGuardianApi";
-import { firebaseRef, githubProvider, googleProvider, facebookProvider } from "app/firebase/";
+import firebase, { firebaseRef, githubProvider, googleProvider, facebookProvider } from "app/firebase/";
 import * as types from 'actionTypes';
 
 
