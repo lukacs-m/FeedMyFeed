@@ -96,7 +96,6 @@ export let getLatestNews = () => {
        return theGuardianAPI.getLastNews().then((res) => {
             let newsArray = [];
             let i = 0;
-
             res.forEach((news) => {
                 newsArray.push({
                     newsId: i++,
