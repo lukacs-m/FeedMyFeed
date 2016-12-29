@@ -11,6 +11,10 @@ export class Articles extends Component {
 
         let renderArticlesItems = () => {
             return articles.map((articlesItem) => {
+
+                console.log("**********************");
+                console.log("articlesItem", articlesItem);
+
                 let { articleContent, id, position } = articlesItem;
                 return (
                     <ArticleItem  key={ id.toString()} articleId={ id } position={ position } { ...articleContent } />

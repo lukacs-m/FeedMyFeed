@@ -9,6 +9,12 @@ To start the project you must:
 
 - You can then launch you favorite browser and got to localhost:3000 to start using FeedMyFeed
 
+- There seems to be some errors with the new Foundation-site lib, if the project doesn't run please execute this following line of command from your terminal:
+
+    *npm install foundation-sites@6.2.0 --save-exact --save-dev
+
+
+
 To run the tests:
 
 make sure you have npm installed and then just execute in your terminal: "npm test".

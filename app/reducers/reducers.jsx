@@ -65,11 +65,16 @@ export let articlesReducer = (state = [], action) => {
                 ...action.articles
             ];
         case REMOVE_ARTICLE_ITEM:
-            return state.filter((article) => {
-                if (article.id !== action.id){
-                    return article;
+            let i = 0;
+            return state.reduce(function(articles, article) {
+                if (article.id !== action.id) {
+                    articles.push({
+                        ... article,
+                        position: i++
+                    });
                 }
-            });
+                return articles;
+            }, []);
         case LOGOUT:
             return [];
         default:
