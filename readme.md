@@ -25,4 +25,5 @@ TODO:
 - Implement a search system to collect specific articles from the guardian api
 - General UI improvement
 - Correction of little bugs
+- Display toast/modale to user
 
